@@ -1,70 +1,226 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+/* eslint-disable */
+import React, { useEffect, useMemo, useState } from "react";
+import {
+  // Image,
+  StyleSheet,
+  // Platform,
+  View,
+  Text,
+  ActivityIndicator,
+  ScrollView,
+  RefreshControl,
+  Image,
+  Pressable,
+  Animated,
+} from "react-native";
+import { fetchStudentCharacters, getRandomElement } from "../../helpres/utils";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useFocusEffect } from "expo-router";
+import ControlPanel from "@/components/ControlPanel";
+import { Hero } from "@/helpres/types";
+import Tableau from "@/components/Tableau/Tableau";
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+type Stat = {
+  total: number;
+  success: number;
+  failed: number;
+};
+
+const initialValue: Stat = {
+  total: 0,
+  success: 0,
+  failed: 0,
+};
 
 export default function HomeScreen() {
+  const queryClient = useQueryClient();
+
+  const { data, error, isLoading } = useQuery({
+    queryKey: ["students"],
+    queryFn: fetchStudentCharacters,
+  });
+  const [hero, setHero] = useState<Hero | null>(null);
+  const fadeAnim = useMemo(() => new Animated.Value(0), []);
+
+  useFocusEffect(() => {
+    fadeAnim.setValue(0);
+    Animated.timing(fadeAnim, {
+      toValue: 1, 
+      duration: 1000,
+      useNativeDriver: true,
+    }).start();
+  });
+
+  useEffect(() => {
+    if (!data) return;
+    if (data.image === undefined || data.image.length === 0) {
+      data.image = "https://hp-api.onrender.com/images/harry.jpg";
+    }
+    const randomGuy: object | undefined = getRandomElement(data);
+    if (randomGuy) {
+      const newRandomGuy = { ...randomGuy as {}, attempts: 0 };
+
+      setHero(newRandomGuy as Hero);
+
+    }
+  }, [data]);
+
+  useEffect(() => {
+    queryClient.setQueryData(["success"], (prevData: number) => {
+      return prevData || 0;
+    });
+    queryClient.setQueryData(["total"], (prevData: number) => {
+      return prevData || 0;
+    });
+    queryClient.setQueryData(["failed"], (prevData: number) => {
+      return prevData || 0;
+    });
+    queryClient.setQueryData(["list"], (prevData: []) => {
+      return prevData || [];
+    });
+  }, []);
+
+  if (isLoading) {
+    return (
+      <View style={styles.loaderContainer}>
+        <ActivityIndicator size="large" color="#0000ff" />
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View style={styles.errorContainer}>
+        <Text>Error: {error.message}</Text>
+      </View>
+    );
+  }
+
+  function reffr() {
+    const randomGuy = getRandomElement(data);
+    if (randomGuy) {
+      const newRandomGuy = { ...randomGuy as object, attempts: 0 };
+      setHero(newRandomGuy as Hero);
+    }
+  }
+
+  function guess(house: string) {
+    console.log(house, "house");
+    if (house === hero?.house) {
+      queryClient.setQueryData(["success"], (prevData: number) => {
+        return prevData + 1;
+      });
+    } else {
+      queryClient.setQueryData(["failed"], (prevData: number) => {
+        return prevData + 1;
+      });
+    }
+    //   queryClient.setQueryData(["stat"], (prevData: Stat) => {
+    //   return {
+    //     ...prevData,
+    //     total: prevData.total + 1,
+    //   };
+    // });
+    if (hero) {
+      queryClient.setQueryData(["list"], (prevData: [] = []) => {
+        const existingHero: Hero | undefined = prevData.find((elem: Hero) => elem.name === hero.name);
+        
+        if (existingHero) {
+          // console.log('uuuiiii', existingHero.house);          
+          return prevData.map((elem: Hero) => {
+            return elem.name === hero.name
+              ? {
+                ...elem, attempts:
+                  hero.house !== house
+                    ? elem.attempts + 1
+                    : 0,
+              }
+              : elem;
+          });
+        } else {
+          return [
+            ...prevData, hero.house !== house
+              ? { ...hero, attempts: 1 }
+              : { ...hero, attempts: 0 },
+          ];
+        }
+      });
+    }
+  }
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({ ios: 'cmd + d', android: 'cmd + m' })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <Animated.View style={{ opacity: fadeAnim }}>
+      <ScrollView
+        refreshControl={<RefreshControl refreshing={false} onRefresh={reffr} />}
+        contentContainerStyle={styles.container}
+      >
+        <Tableau />
+        <View
+
+        // headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
+        >
+          {hero && (
+            <Image
+              source={{
+                uri:
+                  hero.image.length === 0
+                    ? "https://hp-api.onrender.com/images/harry.jpg"
+                    : hero.image,
+              }}
+              style={styles.image}
+              resizeMode="cover"
+            />
+          )}
+          {/* <Text>Welcome!</Text> */}
+          <Text>{hero?.name}</Text>
+          <Text>{hero?.house}</Text>
+          <Text>{hero?.attempts}</Text>
+          
+        </View>
+        <ControlPanel onPress={guess}/>
+      </ScrollView>
+      
+    </Animated.View>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+  container: {
+    flex: 1,
+    // justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#f0f0f0",
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  loaderContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  errorContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#f8d7da",
   },
+  image: {
+    width: 150,
+    height: 200,
+    marginTop: 50,
+    // borderRadius: 50,
+  },
+  // statContainer: {
+  //   flexDirection: "row",
+  //   justifyContent: "space-between",
+  //   width: "100%",
+  //   padding: 20,
+  //   marginTop: 50,
+  // },
+  text: {
+    textAlign: "center",
+  },
+  // statItem: {
+  //   borderColor: "black",
+  //   borderWidth: 1,
+  //   padding: 40,
+  // },
 });
