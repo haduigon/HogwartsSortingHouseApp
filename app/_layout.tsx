@@ -13,7 +13,7 @@ const queryClient = new QueryClient();
 
 export default function RootLayout() {
   const [loaded] = useFonts({
-    SpaceMono
+    SpaceMono,
   });
 
   useEffect(() => {
@@ -35,4 +35,3 @@ export default function RootLayout() {
     </QueryClientProvider>
   );
 }
-

@@ -8,12 +8,11 @@ type Props = {
 };
 
 function TableauItem({ name }: Props) {
-
   const customQuery = useGetCustomQuery();
 
   const fieldName = customQuery(name) as number;
-  const success = customQuery('success') as number;
-  const failed = customQuery('failed') as number;
+  const success = customQuery("success") as number;
+  const failed = customQuery("failed") as number;
 
   const total = (success ?? 0) + (failed ?? 0);
 
@@ -32,7 +31,7 @@ const styles = StyleSheet.create({
     borderColor: "black",
     borderWidth: 2,
     padding: 20,
-    width: '30%',
+    width: "30%",
   },
   text: {
     textAlign: "center",

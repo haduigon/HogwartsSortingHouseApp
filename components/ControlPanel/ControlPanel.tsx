@@ -18,10 +18,10 @@ const ControlPanel: React.FC<Props> = ({ onPress }) => {
         >
           <View style={styles.imageBox}>
             <Image
-            source={Gryffindor || ''}
-            style={styles.image}
-            resizeMode="cover"
-          />
+              source={Gryffindor || ""}
+              style={styles.image}
+              resizeMode="cover"
+            />
           </View>
           <Text style={styles.text}>Gryffindor</Text>
         </Pressable>
@@ -31,9 +31,9 @@ const ControlPanel: React.FC<Props> = ({ onPress }) => {
         >
           <View style={styles.imageBox}>
             <Image
-            source={Slytherin || ''}
-            style={styles.image}
-            resizeMode="cover"
+              source={Slytherin || ""}
+              style={styles.image}
+              resizeMode="cover"
             />
           </View>
           <Text style={styles.text}>Slytherin</Text>
@@ -46,10 +46,10 @@ const ControlPanel: React.FC<Props> = ({ onPress }) => {
         >
           <View style={styles.imageBox}>
             <Image
-            source={Ravenclaw || ''}
-            style={styles.image}
-            resizeMode="cover"
-          />
+              source={Ravenclaw || ""}
+              style={styles.image}
+              resizeMode="cover"
+            />
           </View>
           <Text style={styles.text}>Ravenclaw</Text>
         </Pressable>
@@ -59,10 +59,10 @@ const ControlPanel: React.FC<Props> = ({ onPress }) => {
         >
           <View style={styles.imageBox}>
             <Image
-            source={HufflepuffImage || ''}
-            style={styles.image}
-            resizeMode="cover"
-          />
+              source={HufflepuffImage || ""}
+              style={styles.image}
+              resizeMode="cover"
+            />
           </View>
           <Text style={styles.text}>Hufflepuff</Text>
         </Pressable>
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
   },
   imageBox: {
     padding: 5,
-  }
+  },
 });
 
 export default ControlPanel;

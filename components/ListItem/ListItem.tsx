@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  StyleSheet,
-  View,
-  Text,
-  Image,
-  Pressable,
-} from "react-native";
+import { StyleSheet, View, Text, Image, Pressable } from "react-native";
 import { Hero } from "@/helpres/types";
 import { useRouter } from "expo-router";
 import { useQueryClient } from "@tanstack/react-query";
