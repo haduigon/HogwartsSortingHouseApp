@@ -18,7 +18,7 @@ Here is the main flow:
 
 - The “Reset” button should flush all previously guessed personages and make all total values equal to zero.
 
-- On the List screen display previously guessed affiliations (successful and failed) and the amount of attempts for every character (until successfully guessed).
+- On the List screen display previously guessed affiliations (successful and failed) and the amount of attempts for every character (until successfully guessed). After successfull guess score resets to zero.
 
 - By clicking on the Reload button against the particular character, load this character on the Home screen with the House buttons again.
 
