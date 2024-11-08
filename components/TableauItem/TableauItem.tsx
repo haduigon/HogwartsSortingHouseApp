@@ -2,29 +2,21 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import { View, StyleSheet, Text } from "react-native";
+import useGetCustomQuery from "@/hooks/customHooks";
+import { AppProps } from "@/helpres/types";
 
 type Props = {
-  name: string;
+  name: AppProps;
 };
 
 function TableauItem({ name }: Props) {
   const queryClient = useQueryClient();
 
-  const { data: fieldName } = useQuery<number>({
-    queryKey: [name],
-    enabled: false,
-    initialData: () => queryClient.getQueryData([name]),
-  });
-  const { data: success } = useQuery<number>({
-    queryKey: ["success"],
-    enabled: false,
-    initialData: () => queryClient.getQueryData(["success"]),
-  });
-  const { data: failed } = useQuery<number>({
-    queryKey: ["failed"],
-    enabled: false,
-    initialData: () => queryClient.getQueryData(["failed"]),
-  });
+  const customQuery = useGetCustomQuery();
+
+  const fieldName = customQuery(name) as number;
+  const success = customQuery('success') as number;
+  const failed = customQuery('failed') as number;
 
   const total = (success ?? 0) + (failed ?? 0);
 

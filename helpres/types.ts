@@ -31,4 +31,5 @@ export type AppProps =
   | "failed"
   | "students"
   | "list"
-  | "currentHero";
+  | "currentHero"
+  | "total";

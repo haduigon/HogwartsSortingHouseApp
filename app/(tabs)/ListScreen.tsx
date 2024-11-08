@@ -6,27 +6,25 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import { Hero } from "@/helpres/types";
 import { useRouter, Href } from "expo-router";
 import ListItem from "@/components/ListItem/ListItem";
 import Input from "@/components/Input/Input";
 import Tableau from "@/components/Tableau/Tableau";
+import useGetCustomQuery from "@/hooks/customHooks";
 
 export default function ListScreen() {
   const queryClient = useQueryClient();
 
   const router = useRouter();
+  const customQuery = useGetCustomQuery();
+
+  const cachedList: Hero[] = customQuery("list") as Hero[];
 
   const [visibleList, setVisibleList] = useState<Hero[] | undefined>(
     [] as Hero[],
   );
-
-  const { data: cachedList } = useQuery<Hero[] | undefined>({
-    queryKey: ["list"],
-    enabled: false,
-    initialData: () => queryClient.getQueryData(["list"]),
-  });
 
   useEffect(() => setVisibleList(cachedList), [cachedList]);
 
