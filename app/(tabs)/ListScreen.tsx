@@ -8,34 +8,25 @@ import {
   FlatList,
   Image,
   Animated,
+  Pressable,
+  TouchableWithoutFeedback,
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform
 } from "react-native";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Stat, Hero } from "@/helpres/types";
 import { useFocusEffect } from "@react-navigation/native";
-
-function ListItem(hero: Hero) {
-  // console.log(hero, "heroo");
-
-  return (
-    <View>
-      <Text>{hero.name}</Text>
-      <Text>{hero.attempts}</Text>
-      <Image
-        source={{
-          uri: !hero.image
-            ? "https://hp-api.onrender.com/images/harry.jpg"
-            : hero.image,
-        }}
-        style={styles.image}
-        resizeMode="contain"
-      />
-    </View>
-  );
-}
+import { useRouter, Href } from 'expo-router';
+import ListItem from "@/components/ListItem/ListItem";
+import Input from "@/components/Input/Input";
 
 export default function ListScreen() {
   const queryClient = useQueryClient();
   const fadeAnim = useMemo(() => new Animated.Value(0), []);
+  const router = useRouter();
+
+  const [visibleList, setVisibleList] = useState<Hero[]>([] as Hero[]);
 
   useFocusEffect(() => {
     fadeAnim.setValue(0);
@@ -62,25 +53,40 @@ export default function ListScreen() {
     initialData: () => queryClient.getQueryData(["list"]),
   });
 
-      // console.log(cachedList, "cachedData LIST");
-
+  function retryGuess(hero: Hero) {
+    queryClient.setQueryData(["hero"], () => {
+      return hero;
+    });
+    const path: Href = { pathname: '/' };
+    router.push(path);
+  }
 
   return (
+    <Pressable onPress={Keyboard.dismiss} style={{ flex: 1 }}>
     <Animated.View style={{ opacity: fadeAnim }}>
+      <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      // style={styles.container}
+    >
+      
       <View style={{
         // marginBottom: 10,
       }}>
+        <Input />
         <Text>{cachedData?.total}</Text>
 
         <FlatList
           data={cachedList}
-          renderItem={(name) => ListItem(name.item)}
+          renderItem={({ item }) => <ListItem hero={item} onPress={() => retryGuess(item)}/>}
           keyExtractor={(item) => item.name}
           style={styles.flatListContent}
         />
 
-      </View>
+        </View>
+        
+        </KeyboardAvoidingView>
     </Animated.View>
+    </Pressable>
   );
 }
 
@@ -112,9 +118,10 @@ const styles = StyleSheet.create({
   statContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "center",
     width: "100%",
     padding: 20,
-    marginTop: 50,
+    marginTop: 10,
   },
   text: {
     textAlign: "center",

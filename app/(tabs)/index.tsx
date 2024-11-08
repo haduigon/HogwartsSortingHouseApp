@@ -39,7 +39,15 @@ export default function HomeScreen() {
     queryKey: ["students"],
     queryFn: fetchStudentCharacters,
   });
-  const [hero, setHero] = useState<Hero | null>(null);
+
+   const { data: hero } = useQuery<Hero>({
+    queryKey: ['hero'],
+    enabled: false,
+    initialData: () => queryClient.getQueryData(['hero']),
+  });
+
+  // const [hero, setHero] = useState<Hero | null>(null);
+
   const fadeAnim = useMemo(() => new Animated.Value(0), []);
 
   useFocusEffect(() => {
@@ -60,7 +68,11 @@ export default function HomeScreen() {
     if (randomGuy) {
       const newRandomGuy = { ...randomGuy as {}, attempts: 0 };
 
-      setHero(newRandomGuy as Hero);
+      // setHero(newRandomGuy as Hero);
+
+      queryClient.setQueryData(["hero"], () => {
+      return newRandomGuy;
+    });
 
     }
   }, [data]);
@@ -100,12 +112,18 @@ export default function HomeScreen() {
     const randomGuy = getRandomElement(data);
     if (randomGuy) {
       const newRandomGuy = { ...randomGuy as object, attempts: 0 };
-      setHero(newRandomGuy as Hero);
+      // setHero(newRandomGuy as Hero);
+
+       queryClient.setQueryData(["hero"], () => {
+      return newRandomGuy;
+    });
     }
   }
 
+ 
+
   function guess(house: string) {
-    console.log(house, "house");
+    // console.log(house, "house");
     if (house === hero?.house) {
       queryClient.setQueryData(["success"], (prevData: number) => {
         return prevData + 1;
@@ -115,12 +133,7 @@ export default function HomeScreen() {
         return prevData + 1;
       });
     }
-    //   queryClient.setQueryData(["stat"], (prevData: Stat) => {
-    //   return {
-    //     ...prevData,
-    //     total: prevData.total + 1,
-    //   };
-    // });
+
     if (hero) {
       queryClient.setQueryData(["list"], (prevData: [] = []) => {
         const existingHero: Hero | undefined = prevData.find((elem: Hero) => elem.name === hero.name);
