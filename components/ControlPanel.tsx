@@ -54,26 +54,26 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: "row",
     justifyContent: "space-between",
-    width: "80%", // Adjust width as needed
-    marginVertical: 10, // Space between rows
+    width: "80%",
+    marginVertical: 10,
   },
   fullWidthPressable: {
-    width: 300, // Match the width of the other rows
+    width: 300,
     marginVertical: 10,
     backgroundColor: "#e5e5e5",
     flex: 1,
     borderRadius: 5,
   },
   pressable: {
-    backgroundColor: "#e5e5e5", // Background color for Pressable
+    backgroundColor: "#e5e5e5",
     padding: 15,
     borderRadius: 5,
     alignItems: "center",
-    flex: 1, // Make the Pressable fill the space in the row
-    marginHorizontal: 5, // Space between pressables in the same row
+    flex: 1,
+    marginHorizontal: 5,
   },
   text: {
-    color: "black", // Text color
+    color: "black",
     fontSize: 16,
   },
 });

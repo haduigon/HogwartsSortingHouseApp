@@ -47,19 +47,6 @@ export default function HomeScreen() {
     initialData: () => queryClient.getQueryData(["hero"]),
   });
 
-  // const [hero, setHero] = useState<Hero | null>(null);
-
-  // const fadeAnim = useMemo(() => new Animated.Value(0), []);
-
-  // useFocusEffect(() => {
-  //   fadeAnim.setValue(0);
-  //   Animated.timing(fadeAnim, {
-  //     toValue: 1,
-  //     duration: 1000,
-  //     useNativeDriver: true,
-  //   }).start();
-  // });
-
   useEffect(() => {
     if (!data) return;
     if (data.image === undefined || data.image.length === 0) {
@@ -68,8 +55,6 @@ export default function HomeScreen() {
     const randomGuy: object | undefined = getRandomElement(data);
     if (randomGuy) {
       const newRandomGuy = { ...(randomGuy as {}), attempts: 0 };
-
-      // setHero(newRandomGuy as Hero);
 
       queryClient.setQueryData(["hero"], () => {
         return newRandomGuy;
@@ -112,7 +97,6 @@ export default function HomeScreen() {
     const randomGuy = getRandomElement(data);
     if (randomGuy) {
       const newRandomGuy = { ...(randomGuy as object), attempts: 0 };
-      // setHero(newRandomGuy as Hero);
 
       queryClient.setQueryData(["hero"], () => {
         return newRandomGuy;
@@ -121,7 +105,6 @@ export default function HomeScreen() {
   }
 
   function guess(house: string) {
-    // console.log(house, "house");
     if (house === hero?.house) {
       queryClient.setQueryData(["success"], (prevData: number) => {
         return prevData + 1;
@@ -139,7 +122,6 @@ export default function HomeScreen() {
         );
 
         if (existingHero) {
-          // console.log('uuuiiii', existingHero.house);
           return prevData.map((elem: Hero) => {
             return elem.name === hero.name
               ? {
@@ -161,7 +143,6 @@ export default function HomeScreen() {
   }
 
   return (
-    // <Animated.View style={{ opacity: fadeAnim }}>
     <ScrollView
       refreshControl={<RefreshControl refreshing={false} onRefresh={reffr} />}
       contentContainerStyle={styles.container}
@@ -172,10 +153,7 @@ export default function HomeScreen() {
         isVisible={true}
         onClose={() => {}}
       /> */}
-      <View
-
-      // headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      >
+      <View>
         {hero && (
           <Image
             source={{
@@ -188,15 +166,12 @@ export default function HomeScreen() {
             resizeMode="cover"
           />
         )}
-        {/* <Text>Welcome!</Text> */}
         <Text>{hero?.name}</Text>
         <Text>{hero?.house}</Text>
         <Text>{hero?.attempts}</Text>
       </View>
       <ControlPanel onPress={guess} />
     </ScrollView>
-
-    // </Animated.View>
   );
 }
 
@@ -224,19 +199,7 @@ const styles = StyleSheet.create({
     // marginTop: 50,
     // borderRadius: 50,
   },
-  // statContainer: {
-  //   flexDirection: "row",
-  //   justifyContent: "space-between",
-  //   width: "100%",
-  //   padding: 20,
-  //   marginTop: 50,
-  // },
   text: {
     textAlign: "center",
   },
-  // statItem: {
-  //   borderColor: "black",
-  //   borderWidth: 1,
-  //   padding: 40,
-  // },
 });

@@ -10,7 +10,6 @@ const ModalMessage = ({
   isVisible: boolean;
   onClose: () => void;
 }) => {
-  // Determine the color based on the message type
   const isPositiveMessage =
     message.toLowerCase().includes("success") ||
     message.toLowerCase().includes("positive");
@@ -46,12 +45,12 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     flex: 1,
-    backgroundColor: "rgba(0, 0, 0, 0.5)", // Transparent background
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
     justifyContent: "center",
     alignItems: "center",
   },
   messageContainer: {
-    backgroundColor: "transparent", // Fully transparent background
+    backgroundColor: "transparent",
     padding: 20,
   },
   messageText: {

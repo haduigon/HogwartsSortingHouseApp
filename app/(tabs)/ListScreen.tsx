@@ -6,50 +6,29 @@ import {
   View,
   Text,
   FlatList,
-  Image,
-  Animated,
-  Pressable,
-  TouchableWithoutFeedback,
-  Keyboard,
   KeyboardAvoidingView,
   Platform,
-  TextInput,
 } from "react-native";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { Stat, Hero } from "@/helpres/types";
-import { useFocusEffect } from "@react-navigation/native";
+import { Hero } from "@/helpres/types";
 import { useRouter, Href } from "expo-router";
 import ListItem from "@/components/ListItem/ListItem";
 import Input from "@/components/Input/Input";
 
 export default function ListScreen() {
   const queryClient = useQueryClient();
-  // const fadeAnim = useMemo(() => new Animated.Value(0), []);
+
   const router = useRouter();
 
   const [visibleList, setVisibleList] = useState<Hero[] | undefined>(
     [] as Hero[],
   );
-  const [searchInput, setSearchInput] = useState<string>("");
 
-  const { data: cachedData } = useQuery<Stat>({
-    queryKey: ["stat"],
-    enabled: false,
-    initialData: () => queryClient.getQueryData(["stat"]),
-  });
   const { data: cachedList } = useQuery<Hero[] | undefined>({
     queryKey: ["list"],
     enabled: false,
     initialData: () => queryClient.getQueryData(["list"]),
   });
-  // useFocusEffect(() => {
-  //   fadeAnim.setValue(0);
-  //   Animated.timing(fadeAnim, {
-  //     toValue: 1,
-  //     duration: 1000,
-  //     useNativeDriver: true,
-  //   }).start();
-  // });
 
   useEffect(() => setVisibleList(cachedList), [cachedList]);
 
@@ -62,14 +41,6 @@ export default function ListScreen() {
   }
 
   function search(text: string) {
-    // setSearchInput(text)
-    console.log(
-      cachedList?.filter((hero) =>
-        hero.name.toLowerCase().includes(text.toLowerCase()),
-      ),
-      "search",
-    );
-
     setVisibleList(
       cachedList?.filter((hero) =>
         hero.name.toLowerCase().includes(text.toLowerCase()),

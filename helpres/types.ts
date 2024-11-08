@@ -1,8 +1,8 @@
-export type Stat = {
-  total: number;
-  success: number;
-  failed: number;
-};
+// export type Stat = {
+//   total: number;
+//   success: number;
+//   failed: number;
+// };
 
 // export type ApiHeroes
 

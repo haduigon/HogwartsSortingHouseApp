@@ -10,7 +10,7 @@ import {
   Animated,
   Pressable,
 } from "react-native";
-import { Stat, Hero } from "@/helpres/types";
+import { Hero } from "@/helpres/types";
 import { useRouter } from "expo-router";
 import { useQueryClient } from "@tanstack/react-query";
 
@@ -24,10 +24,9 @@ function ListItem({ hero, onPress }: ListItemProps) {
   const queryClient = useQueryClient();
   function handlePress(hero: Hero) {
     queryClient.setQueryData(["currentHero"], hero);
-    // Navigate to the details page and pass the hero data as a query parameter
+
     router.push({
       pathname: "/Details",
-      // params: { hero: JSON.stringify(hero) }, // Serialize hero if needed
     });
   }
 

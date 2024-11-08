@@ -5,11 +5,8 @@ import { TabBarIcon } from "@/components/navigation/TabBarIcon";
 import { TouchableOpacity, Text } from "react-native";
 import { Hero } from "@/helpres/types";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-// import { Colors } from "@/constants/Colors";
-// import { useColorScheme } from '@/hooks/useColorScheme';
 
 export default function TabLayout() {
-  // const colorScheme = useColorScheme();
   const queryClient = useQueryClient();
   const navigation = useNavigation();
 
@@ -29,7 +26,6 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        // tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: false,
       }}
     >
@@ -37,7 +33,6 @@ export default function TabLayout() {
         name="index"
         options={{
           title: "Home2",
-          // tabBarButton: () => null,
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon
               name={focused ? "home" : "home-outline"}
@@ -59,7 +54,6 @@ export default function TabLayout() {
         name="ListScreen"
         options={{
           title: "List",
-          // tabBarButton: () => null,
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon
               name={focused ? "code-slash" : "code-slash-outline"}
