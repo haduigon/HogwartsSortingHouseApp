@@ -69,11 +69,17 @@ https://github.com/user-attachments/assets/fbc65421-545a-40d0-b26c-d4586e56c5c2
 # _Screenshots and video for Android are bellow:_
 
 <details>
+  
 ![2024-11-08 22 01 07](https://github.com/user-attachments/assets/726f773b-496c-410c-92fa-b39063bdd136)
+
 ![2024-11-08 22 01 15](https://github.com/user-attachments/assets/3d255da6-8cbb-4f6f-acf0-6ba86baba09c)
+
 ![2024-11-08 22 00 44](https://github.com/user-attachments/assets/a923b3b9-35e0-43ed-be5e-6d48e6b74a51)
+
 ![2024-11-08 22 00 57](https://github.com/user-attachments/assets/fc3a1dd9-8967-414f-8eee-3b4a3a2fbcb6)
+
 https://github.com/user-attachments/assets/2eee4f84-ec9d-4e50-8104-38e739f18e51
+
 </details>
 
 # Technologies list:
