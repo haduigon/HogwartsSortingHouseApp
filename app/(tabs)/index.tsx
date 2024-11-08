@@ -48,16 +48,16 @@ export default function HomeScreen() {
 
   // const [hero, setHero] = useState<Hero | null>(null);
 
-  const fadeAnim = useMemo(() => new Animated.Value(0), []);
+  // const fadeAnim = useMemo(() => new Animated.Value(0), []);
 
-  useFocusEffect(() => {
-    fadeAnim.setValue(0);
-    Animated.timing(fadeAnim, {
-      toValue: 1, 
-      duration: 1000,
-      useNativeDriver: true,
-    }).start();
-  });
+  // useFocusEffect(() => {
+  //   fadeAnim.setValue(0);
+  //   Animated.timing(fadeAnim, {
+  //     toValue: 1, 
+  //     duration: 1000,
+  //     useNativeDriver: true,
+  //   }).start();
+  // });
 
   useEffect(() => {
     if (!data) return;
@@ -162,7 +162,7 @@ export default function HomeScreen() {
   }
 
   return (
-    <Animated.View style={{ opacity: fadeAnim }}>
+    // <Animated.View style={{ opacity: fadeAnim }}>
       <ScrollView
         refreshControl={<RefreshControl refreshing={false} onRefresh={reffr} />}
         contentContainerStyle={styles.container}
@@ -193,7 +193,7 @@ export default function HomeScreen() {
         <ControlPanel onPress={guess}/>
       </ScrollView>
       
-    </Animated.View>
+    // </Animated.View>
   );
 }
 

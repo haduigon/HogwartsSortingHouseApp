@@ -33,7 +33,7 @@ function ListItem({ hero, onPress }: ListItemProps) {
         style={styles.image}
         resizeMode="contain"
       />
-      <Pressable onPress={onPress}>
+      <Pressable onPress={() => onPress()}>
         <Text>Retry</Text>
       </Pressable>
     </View>
