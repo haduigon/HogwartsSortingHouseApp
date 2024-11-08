@@ -1,5 +1,3 @@
-/* eslint-disable */
-import { useQuery, useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 import useGetCustomQuery from "@/hooks/customHooks";
@@ -10,7 +8,6 @@ type Props = {
 };
 
 function TableauItem({ name }: Props) {
-  const queryClient = useQueryClient();
 
   const customQuery = useGetCustomQuery();
 
