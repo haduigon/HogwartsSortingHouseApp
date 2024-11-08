@@ -1,4 +1,4 @@
-import { Tabs, useNavigation } from "expo-router";
+import { Tabs, useNavigation, useRouter } from "expo-router";
 import React from "react";
 
 import { TabBarIcon } from "@/components/navigation/TabBarIcon";
@@ -9,6 +9,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 export default function TabLayout() {
   const queryClient = useQueryClient();
   const navigation = useNavigation();
+  const router = useRouter();
 
   const { data: currentHero } = useQuery<Hero>({
     queryKey: ["currentHero"],
@@ -64,7 +65,7 @@ export default function TabLayout() {
           headerLeft: () => (
             <TouchableOpacity
               style={{ padding: 10 }}
-              onPress={() => navigation.goBack()}
+              onPress={() => router.push({ pathname: '/' })}
             >
               <Text>Back</Text>
             </TouchableOpacity>
@@ -78,7 +79,9 @@ export default function TabLayout() {
             </TouchableOpacity>
           ),
         }}
-      />
+      >
+        
+      </Tabs.Screen>
       <Tabs.Screen
         name="Details"
         options={() => {
@@ -89,7 +92,7 @@ export default function TabLayout() {
             headerLeft: () => (
               <TouchableOpacity
                 style={{ padding: 10 }}
-                onPress={() => navigation.goBack()}
+                onPress={() => router.push({ pathname: '/ListScreen' })}
               >
                 <Text>Back</Text>
               </TouchableOpacity>
