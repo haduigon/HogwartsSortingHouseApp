@@ -49,9 +49,6 @@ export default function HomeScreen() {
     queryClient.setQueryData(["success"], (prevData: number) => {
       return prevData || 0;
     });
-    queryClient.setQueryData(["total"], (prevData: number) => {
-      return prevData || 0;
-    });
     queryClient.setQueryData(["failed"], (prevData: number) => {
       return prevData || 0;
     });
@@ -76,7 +73,7 @@ export default function HomeScreen() {
     );
   }
 
-  function reffr() {
+  function reffresh() {
     const randomGuy = getRandomElement(data);
     if (randomGuy) {
       const newRandomGuy = { ...(randomGuy as object), attempts: 0 };
@@ -95,7 +92,7 @@ export default function HomeScreen() {
 
       setModalMessage("SUCCESS!");
 
-      setTimeout(() => reffr(), 2000);
+      setTimeout(() => reffresh(), 2000);
       setTimeout(() => setModalMessage(null), 2000);
     } else {
       queryClient.setQueryData(["failed"], (prevData: number) => {
@@ -134,7 +131,7 @@ export default function HomeScreen() {
 
   return (
     <ScrollView
-      refreshControl={<RefreshControl refreshing={false} onRefresh={reffr} />}
+      refreshControl={<RefreshControl refreshing={false} onRefresh={reffresh} />}
       contentContainerStyle={styles.container}
     >
       <Tableau />
@@ -170,7 +167,6 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#f0f0f0",
     borderTopWidth: 5,

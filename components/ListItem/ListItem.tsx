@@ -1,13 +1,9 @@
-/* eslint-disable */
 import React from "react";
 import {
-  // Image,
   StyleSheet,
   View,
   Text,
-  FlatList,
   Image,
-  Animated,
   Pressable,
 } from "react-native";
 import { Hero } from "@/helpres/types";
@@ -72,7 +68,6 @@ const styles = StyleSheet.create({
     width: 50,
     height: 80,
     marginTop: 10,
-    // borderRadius: 50,
   },
   statContainer: {
     flexDirection: "row",
@@ -82,7 +77,6 @@ const styles = StyleSheet.create({
     padding: 10,
     paddingLeft: 20,
     paddingRight: 20,
-    // marginTop: 0,
   },
   text: {
     textAlign: "center",

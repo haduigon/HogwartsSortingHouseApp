@@ -8,7 +8,6 @@ import Gryffindor from "../../assets/images/gryffindor.png";
 type Props = {
   onPress: (house: string) => void;
 };
-// const heroImage = require("../../assets/hero.png");
 const ControlPanel: React.FC<Props> = ({ onPress }) => {
   return (
     <View style={styles.container}>

@@ -1,11 +1,3 @@
-// export type Stat = {
-//   total: number;
-//   success: number;
-//   failed: number;
-// };
-
-// export type ApiHeroes
-
 export type Hero = {
   actor: string;
   alive: boolean;
@@ -32,3 +24,11 @@ export type Hero = {
   yearOfBirth: number | null;
   attempts: number;
 };
+
+export type AppProps =
+  | "hero"
+  | "success"
+  | "failed"
+  | "students"
+  | "list"
+  | "currentHero";

@@ -1,16 +1,13 @@
 import React from "react";
 import { View, Text, Image, StyleSheet } from "react-native";
 import { Hero } from "@/helpres/types";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import useGetCustomQuery from "@/hooks/customHooks";
 
 function HeroDetails() {
-  const queryClient = useQueryClient();
 
-  const { data: currentHero } = useQuery<Hero>({
-    queryKey: ["currentHero"],
-    enabled: false,
-    initialData: () => queryClient.getQueryData(["currentHero"]),
-  });
+  const customQuery = useGetCustomQuery();
+
+  const currentHero: Hero = customQuery("currentHero") as Hero;
 
   return (
     <View style={styles.container}>
