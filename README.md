@@ -52,16 +52,11 @@ Done.
 
 <details>
 ![Simulator Screenshot - iPhone 15 Pro Max - 2024-11-08 at 21 13 33](https://github.com/user-attachments/assets/a7243f9d-3cfe-4371-af69-2786bd14a8f6)
-
 ![Simulator Screenshot - iPhone 15 Pro Max - 2024-11-08 at 21 13 58](https://github.com/user-attachments/assets/23b1ac47-8645-474f-9df8-3aa9a6035381)
 ![Simulator Screenshot - iPhone 15 Pro Max - 2024-11-08 at 21 14 09](https://github.com/user-attachments/assets/98e60cb2-272d-4f7c-b754-32ee0a81840a)
 ![Simulator Screenshot - iPhone 15 Pro Max - 2024-11-08 at 21 14 27](https://github.com/user-attachments/assets/68752e77-66f3-4d13-a4d1-80f90e076755)
-
-
 https://github.com/user-attachments/assets/091d3a14-09d5-4081-9ca5-374ed6278898
-
-
-
+https://github.com/user-attachments/assets/fbc65421-545a-40d0-b26c-d4586e56c5c2
 </details>
 
 # _Screenshots and video for Android are bellow:_
@@ -71,7 +66,7 @@ https://github.com/user-attachments/assets/091d3a14-09d5-4081-9ca5-374ed6278898
 ![2024-11-08 22 01 15](https://github.com/user-attachments/assets/3d255da6-8cbb-4f6f-acf0-6ba86baba09c)
 ![2024-11-08 22 00 44](https://github.com/user-attachments/assets/a923b3b9-35e0-43ed-be5e-6d48e6b74a51)
 ![2024-11-08 22 00 57](https://github.com/user-attachments/assets/fc3a1dd9-8967-414f-8eee-3b4a3a2fbcb6)
-https://github.com/user-attachments/assets/5488c1e5-b38b-44f4-8294-71456d5fbede
+https://github.com/user-attachments/assets/2eee4f84-ec9d-4e50-8104-38e739f18e51
 </details>
 
 # Technologies list:
