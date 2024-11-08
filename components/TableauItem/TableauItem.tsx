@@ -1,12 +1,11 @@
 /* eslint-disable */
-
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 
 type Props = {
-  name: string,
-}
+  name: string;
+};
 
 function TableauItem({ name }: Props) {
   const queryClient = useQueryClient();
@@ -17,31 +16,30 @@ function TableauItem({ name }: Props) {
     initialData: () => queryClient.getQueryData([name]),
   });
   const { data: success } = useQuery<number>({
-    queryKey: ['success'],
+    queryKey: ["success"],
     enabled: false,
-    initialData: () => queryClient.getQueryData(['success']),
+    initialData: () => queryClient.getQueryData(["success"]),
   });
   const { data: failed } = useQuery<number>({
-    queryKey: ['failed'],
+    queryKey: ["failed"],
     enabled: false,
-    initialData: () => queryClient.getQueryData(['failed']),
+    initialData: () => queryClient.getQueryData(["failed"]),
   });
 
   const total = (success ?? 0) + (failed ?? 0);
 
-  const displayData = name === 'total' ? total : fieldName;
-// console.log(displayData, "fieldName");
+  const displayData = name === "total" ? total : fieldName;
 
   return (
     <View style={styles.statItem}>
       <Text style={styles.text}>{name}</Text>
       <Text style={styles.text}>{displayData}</Text>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
-   statContainer: {
+  statContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
     width: "100%",
@@ -57,6 +55,6 @@ const styles = StyleSheet.create({
   text: {
     textAlign: "center",
   },
-})
+});
 
 export default TableauItem;

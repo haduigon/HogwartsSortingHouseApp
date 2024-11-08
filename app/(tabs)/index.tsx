@@ -19,6 +19,7 @@ import { useFocusEffect } from "expo-router";
 import ControlPanel from "@/components/ControlPanel";
 import { Hero } from "@/helpres/types";
 import Tableau from "@/components/Tableau/Tableau";
+import ModalMessage from "@/components/ModalMessage/ModalMessage";
 
 type Stat = {
   total: number;
@@ -40,10 +41,10 @@ export default function HomeScreen() {
     queryFn: fetchStudentCharacters,
   });
 
-   const { data: hero } = useQuery<Hero>({
-    queryKey: ['hero'],
+  const { data: hero } = useQuery<Hero>({
+    queryKey: ["hero"],
     enabled: false,
-    initialData: () => queryClient.getQueryData(['hero']),
+    initialData: () => queryClient.getQueryData(["hero"]),
   });
 
   // const [hero, setHero] = useState<Hero | null>(null);
@@ -53,7 +54,7 @@ export default function HomeScreen() {
   // useFocusEffect(() => {
   //   fadeAnim.setValue(0);
   //   Animated.timing(fadeAnim, {
-  //     toValue: 1, 
+  //     toValue: 1,
   //     duration: 1000,
   //     useNativeDriver: true,
   //   }).start();
@@ -66,14 +67,13 @@ export default function HomeScreen() {
     }
     const randomGuy: object | undefined = getRandomElement(data);
     if (randomGuy) {
-      const newRandomGuy = { ...randomGuy as {}, attempts: 0 };
+      const newRandomGuy = { ...(randomGuy as {}), attempts: 0 };
 
       // setHero(newRandomGuy as Hero);
 
       queryClient.setQueryData(["hero"], () => {
-      return newRandomGuy;
-    });
-
+        return newRandomGuy;
+      });
     }
   }, [data]);
 
@@ -111,16 +111,14 @@ export default function HomeScreen() {
   function reffr() {
     const randomGuy = getRandomElement(data);
     if (randomGuy) {
-      const newRandomGuy = { ...randomGuy as object, attempts: 0 };
+      const newRandomGuy = { ...(randomGuy as object), attempts: 0 };
       // setHero(newRandomGuy as Hero);
 
-       queryClient.setQueryData(["hero"], () => {
-      return newRandomGuy;
-    });
+      queryClient.setQueryData(["hero"], () => {
+        return newRandomGuy;
+      });
     }
   }
-
- 
 
   function guess(house: string) {
     // console.log(house, "house");
@@ -136,23 +134,24 @@ export default function HomeScreen() {
 
     if (hero) {
       queryClient.setQueryData(["list"], (prevData: [] = []) => {
-        const existingHero: Hero | undefined = prevData.find((elem: Hero) => elem.name === hero.name);
-        
+        const existingHero: Hero | undefined = prevData.find(
+          (elem: Hero) => elem.name === hero.name,
+        );
+
         if (existingHero) {
-          // console.log('uuuiiii', existingHero.house);          
+          // console.log('uuuiiii', existingHero.house);
           return prevData.map((elem: Hero) => {
             return elem.name === hero.name
               ? {
-                ...elem, attempts:
-                  hero.house !== house
-                    ? elem.attempts + 1
-                    : 0,
-              }
+                  ...elem,
+                  attempts: hero.house !== house ? elem.attempts + 1 : 0,
+                }
               : elem;
           });
         } else {
           return [
-            ...prevData, hero.house !== house
+            ...prevData,
+            hero.house !== house
               ? { ...hero, attempts: 1 }
               : { ...hero, attempts: 0 },
           ];
@@ -163,36 +162,40 @@ export default function HomeScreen() {
 
   return (
     // <Animated.View style={{ opacity: fadeAnim }}>
-      <ScrollView
-        refreshControl={<RefreshControl refreshing={false} onRefresh={reffr} />}
-        contentContainerStyle={styles.container}
-      >
-        <Tableau />
-        <View
+    <ScrollView
+      refreshControl={<RefreshControl refreshing={false} onRefresh={reffr} />}
+      contentContainerStyle={styles.container}
+    >
+      <Tableau />
+      {/* <ModalMessage
+        message="SUCCESS!"
+        isVisible={true}
+        onClose={() => {}}
+      /> */}
+      <View
 
-        // headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-        >
-          {hero && (
-            <Image
-              source={{
-                uri:
-                  hero.image.length === 0
-                    ? "https://hp-api.onrender.com/images/harry.jpg"
-                    : hero.image,
-              }}
-              style={styles.image}
-              resizeMode="cover"
-            />
-          )}
-          {/* <Text>Welcome!</Text> */}
-          <Text>{hero?.name}</Text>
-          <Text>{hero?.house}</Text>
-          <Text>{hero?.attempts}</Text>
-          
-        </View>
-        <ControlPanel onPress={guess}/>
-      </ScrollView>
-      
+      // headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
+      >
+        {hero && (
+          <Image
+            source={{
+              uri:
+                hero.image.length === 0
+                  ? "https://hp-api.onrender.com/images/harry.jpg"
+                  : hero.image,
+            }}
+            style={styles.image}
+            resizeMode="cover"
+          />
+        )}
+        {/* <Text>Welcome!</Text> */}
+        <Text>{hero?.name}</Text>
+        <Text>{hero?.house}</Text>
+        <Text>{hero?.attempts}</Text>
+      </View>
+      <ControlPanel onPress={guess} />
+    </ScrollView>
+
     // </Animated.View>
   );
 }
@@ -218,7 +221,7 @@ const styles = StyleSheet.create({
   image: {
     width: 150,
     height: 200,
-    marginTop: 50,
+    // marginTop: 50,
     // borderRadius: 50,
   },
   // statContainer: {

@@ -5,9 +5,9 @@ import TableauItem from "../TableauItem/TableauItem";
 function Tableau() {
   return (
     <View style={styles.statContainer}>
-      <TableauItem name='total'/>
-      <TableauItem name="failed"/>
-      <TableauItem name='success'/>
+      <TableauItem name="total" />
+      <TableauItem name="failed" />
+      <TableauItem name="success" />
     </View>
   );
 }
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     width: "100%",
     padding: 20,
-    marginTop: 50,
+    marginTop: 0,
   },
   statItem: {
     borderColor: "black",

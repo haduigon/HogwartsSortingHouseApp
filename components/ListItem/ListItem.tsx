@@ -11,32 +11,45 @@ import {
   Pressable,
 } from "react-native";
 import { Stat, Hero } from "@/helpres/types";
-
+import { useRouter } from "expo-router";
+import { useQueryClient } from "@tanstack/react-query";
 
 type ListItemProps = {
   onPress: () => void;
   hero: Hero;
-}
+};
 
 function ListItem({ hero, onPress }: ListItemProps) {
+  const router = useRouter();
+  const queryClient = useQueryClient();
+  function handlePress(hero: Hero) {
+    queryClient.setQueryData(["currentHero"], hero);
+    // Navigate to the details page and pass the hero data as a query parameter
+    router.push({
+      pathname: "/Details",
+      // params: { hero: JSON.stringify(hero) }, // Serialize hero if needed
+    });
+  }
 
   return (
-    <View style={styles.statContainer}>
-      <Text>{hero.name}</Text>
-      <Text>{hero.attempts}</Text>
-      <Image
-        source={{
-          uri: !hero.image
-            ? "https://hp-api.onrender.com/images/harry.jpg"
-            : hero.image,
-        }}
-        style={styles.image}
-        resizeMode="contain"
-      />
-      <Pressable onPress={() => onPress()}>
-        <Text>Retry</Text>
-      </Pressable>
-    </View>
+    <Pressable onPress={() => handlePress(hero)}>
+      <View style={styles.statContainer}>
+        <Text>{hero.name}</Text>
+        <Text>{hero.attempts}</Text>
+        <Image
+          source={{
+            uri: !hero.image
+              ? "https://hp-api.onrender.com/images/harry.jpg"
+              : hero.image,
+          }}
+          style={styles.image}
+          resizeMode="contain"
+        />
+        <Pressable onPress={() => onPress()}>
+          <Text>Retry</Text>
+        </Pressable>
+      </View>
+    </Pressable>
   );
 }
 
@@ -46,7 +59,7 @@ const styles = StyleSheet.create({
     // justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#f0f0f0",
-    marginBottom: 10
+    marginBottom: 10,
   },
   loaderContainer: {
     flex: 1,

@@ -28,10 +28,10 @@ export default function ListScreen() {
   const router = useRouter();
 
   const [visibleList, setVisibleList] = useState<Hero[] | undefined>(
-    [] as Hero[]
+    [] as Hero[],
   );
   const [searchInput, setSearchInput] = useState<string>("");
-  
+
   const { data: cachedData } = useQuery<Stat>({
     queryKey: ["stat"],
     enabled: false,
@@ -51,7 +51,7 @@ export default function ListScreen() {
   //   }).start();
   // });
 
-  useEffect(() => setVisibleList(cachedList), [cachedList]); 
+  useEffect(() => setVisibleList(cachedList), [cachedList]);
 
   function retryGuess(hero: Hero) {
     queryClient.setQueryData(["hero"], () => {
@@ -65,35 +65,35 @@ export default function ListScreen() {
     // setSearchInput(text)
     console.log(
       cachedList?.filter((hero) =>
-        hero.name.toLowerCase().includes(text.toLowerCase())
+        hero.name.toLowerCase().includes(text.toLowerCase()),
       ),
-      "search"
+      "search",
     );
 
     setVisibleList(
       cachedList?.filter((hero) =>
-        hero.name.toLowerCase().includes(text.toLowerCase())
-      )
+        hero.name.toLowerCase().includes(text.toLowerCase()),
+      ),
     );
   }
 
   return (
-        <KeyboardAvoidingView
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
-        >
-          <View>
-            <Input onChange={search} />
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
+      <View>
+        <Input onChange={search} />
 
-            <FlatList
-              data={visibleList}
-              renderItem={({ item }) => (
-                <ListItem hero={item} onPress={() => retryGuess(item)} />
-              )}
-              keyExtractor={(item) => item.name}
-              style={styles.flatListContent}
-            />
-          </View>
-        </KeyboardAvoidingView>
+        <FlatList
+          data={visibleList}
+          renderItem={({ item }) => (
+            <ListItem hero={item} onPress={() => retryGuess(item)} />
+          )}
+          keyExtractor={(item) => item.name}
+          style={styles.flatListContent}
+        />
+      </View>
+    </KeyboardAvoidingView>
   );
 }
 

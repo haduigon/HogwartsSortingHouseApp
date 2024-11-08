@@ -4,9 +4,9 @@ import { TextInput, StyleSheet } from "react-native";
 type Props = {
   value?: string;
   onChange?: (text: string) => void;
-}
+};
 
-function Input({ value, onChange }: Props) { 
+function Input({ value, onChange }: Props) {
   return (
     <TextInput
       placeholder="Search"
@@ -20,7 +20,7 @@ function Input({ value, onChange }: Props) {
 const styles = StyleSheet.create({
   searchInput: {
     padding: 10,
-    borderColor: '#ccc',
+    borderColor: "#ccc",
     borderWidth: 1,
     marginBottom: 10,
     borderRadius: 5,
