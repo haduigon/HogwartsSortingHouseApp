@@ -143,7 +143,8 @@ export default function HomeScreen() {
         />
       )}
 
-      <View>
+      {/* <View> */}
+        <View style={styles.imageBox}>
         {hero && (
           <Image
             source={{
@@ -156,9 +157,13 @@ export default function HomeScreen() {
             resizeMode="cover"
           />
         )}
-        <Text>Hero: {hero?.name}</Text>
-        <Text>House: {hero?.house}</Text>
+        {/* </View> */}
+        <View style={styles.textBox}>
+          <Text>Hero: {hero?.name}</Text>
+          <Text>House: {hero?.house}</Text>
+        </View>
       </View>
+      
       <ControlPanel onPress={guess} />
     </ScrollView>
   );
@@ -192,4 +197,10 @@ const styles = StyleSheet.create({
   text: {
     textAlign: "center",
   },
+  imageBox: {
+    width: 150
+  },
+  textBox: {
+    height: 50,
+  }
 });

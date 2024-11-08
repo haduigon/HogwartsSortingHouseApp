@@ -58,7 +58,7 @@ export default function ListScreen() {
           renderItem={({ item }) => (
             <ListItem hero={item} onPress={() => retryGuess(item)} />
           )}
-          keyExtractor={(item) => item.name}
+          keyExtractor={(item) => item.name.toString()}
           style={styles.flatListContent}
         />
       </View>
@@ -110,5 +110,6 @@ const styles = StyleSheet.create({
   },
   flatListContent: {
     marginBottom: 10,
+    marginTop: 5,
   },
 });
