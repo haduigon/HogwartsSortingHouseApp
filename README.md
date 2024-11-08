@@ -56,8 +56,11 @@ Done.
 ![Simulator Screenshot - iPhone 15 Pro Max - 2024-11-08 at 21 13 58](https://github.com/user-attachments/assets/23b1ac47-8645-474f-9df8-3aa9a6035381)
 ![Simulator Screenshot - iPhone 15 Pro Max - 2024-11-08 at 21 14 09](https://github.com/user-attachments/assets/98e60cb2-272d-4f7c-b754-32ee0a81840a)
 ![Simulator Screenshot - iPhone 15 Pro Max - 2024-11-08 at 21 14 27](https://github.com/user-attachments/assets/68752e77-66f3-4d13-a4d1-80f90e076755)
-https://github.com/user-attachments/assets/2d886eca-16f3-42a6-90b5-459be1be5eab
-https://github.com/user-attachments/assets/377fe356-0805-4966-8866-68dce61a535f
+
+
+https://github.com/user-attachments/assets/091d3a14-09d5-4081-9ca5-374ed6278898
+
+
 
 </details>
 
