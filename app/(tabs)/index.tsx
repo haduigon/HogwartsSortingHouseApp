@@ -164,9 +164,8 @@ export default function HomeScreen() {
             resizeMode="cover"
           />
         )}
-        <Text>{hero?.name}</Text>
-        <Text>{hero?.house}</Text>
-        <Text>{hero?.attempts}</Text>
+        <Text>Hero: {hero?.name}</Text>
+        <Text>House: {hero?.house}</Text>
       </View>
       <ControlPanel onPress={guess} />
     </ScrollView>

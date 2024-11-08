@@ -1,4 +1,4 @@
-import { Tabs, useNavigation, useRouter } from "expo-router";
+import { Tabs, useRouter } from "expo-router";
 import React from "react";
 
 import { TabBarIcon } from "@/components/navigation/TabBarIcon";
@@ -8,7 +8,6 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 export default function TabLayout() {
   const queryClient = useQueryClient();
-  const navigation = useNavigation();
   const router = useRouter();
 
   const { data: currentHero } = useQuery<Hero>({
@@ -33,12 +32,16 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "Home2",
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon
-              name={focused ? "home" : "home-outline"}
-              color={color}
-            />
+          title: "Home",
+
+          tabBarIcon: ({ focused }) => (
+            <TabBarIcon name={"home"} color={focused ? "black" : "grey"} />
+          ),
+          tabBarLabelStyle: {
+            fontSize: 12,
+          },
+          tabBarLabel: ({ focused }) => (
+            <Text style={{ color: focused ? "black" : "grey" }}>Home</Text>
           ),
           headerShown: true,
           headerRight: () => (
@@ -46,7 +49,7 @@ export default function TabLayout() {
               style={{ padding: 10 }}
               onPress={() => handleRightButtonPress()}
             >
-              <Text>Right Action</Text>
+              <Text>Reset</Text>
             </TouchableOpacity>
           ),
         }}
@@ -55,17 +58,23 @@ export default function TabLayout() {
         name="ListScreen"
         options={{
           title: "List",
-          tabBarIcon: ({ color, focused }) => (
+          tabBarIcon: ({ focused }) => (
             <TabBarIcon
-              name={focused ? "code-slash" : "code-slash-outline"}
-              color={color}
+              name={"code-slash"}
+              color={focused ? "black" : "grey"}
             />
+          ),
+          tabBarLabelStyle: {
+            fontSize: 12,
+          },
+          tabBarLabel: ({ focused }) => (
+            <Text style={{ color: focused ? "black" : "grey" }}>List</Text>
           ),
           headerShown: true,
           headerLeft: () => (
             <TouchableOpacity
               style={{ padding: 10 }}
-              onPress={() => router.push({ pathname: '/' })}
+              onPress={() => router.push({ pathname: "/" })}
             >
               <Text>Back</Text>
             </TouchableOpacity>
@@ -75,13 +84,11 @@ export default function TabLayout() {
               style={{ padding: 10 }}
               onPress={() => handleRightButtonPress()}
             >
-              <Text>Right Action</Text>
+              <Text>Reset</Text>
             </TouchableOpacity>
           ),
         }}
-      >
-        
-      </Tabs.Screen>
+      ></Tabs.Screen>
       <Tabs.Screen
         name="Details"
         options={() => {
@@ -92,7 +99,7 @@ export default function TabLayout() {
             headerLeft: () => (
               <TouchableOpacity
                 style={{ padding: 10 }}
-                onPress={() => router.push({ pathname: '/ListScreen' })}
+                onPress={() => router.push({ pathname: "/ListScreen" })}
               >
                 <Text>Back</Text>
               </TouchableOpacity>
