@@ -14,7 +14,7 @@ import {
 import { fetchStudentCharacters, getRandomElement } from "../../helpres/utils";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 // import { useFocusEffect } from "expo-router";
-import ControlPanel from "@/components/ControlPanel";
+import ControlPanel from "@/components/ControlPanel/ControlPanel";
 import { Hero } from "@/helpres/types";
 import Tableau from "@/components/Tableau/Tableau";
 import ModalMessage from "@/components/ModalMessage/ModalMessage";
@@ -193,8 +193,8 @@ const styles = StyleSheet.create({
   image: {
     width: 150,
     height: 200,
-    // marginTop: 50,
-    // borderRadius: 50,
+    justifyContent: "center",
+    alignItems: "center",
   },
   text: {
     textAlign: "center",

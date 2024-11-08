@@ -3,7 +3,7 @@ import React from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { type IconProps } from "@expo/vector-icons/build/createIconSet";
 import { type ComponentProps } from "react";
-import { View, Text } from "react-native";
+import { View } from "react-native";
 
 export function TabBarIcon({
   style,
@@ -20,7 +20,6 @@ export function TabBarIcon({
         style={[{ marginBottom: -3 }, style]} {...rest}
         
       />
-      {/* <Text>Icon</Text> */}
     </View>
   );
 }

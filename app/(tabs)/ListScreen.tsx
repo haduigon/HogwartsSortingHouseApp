@@ -14,6 +14,7 @@ import { Hero } from "@/helpres/types";
 import { useRouter, Href } from "expo-router";
 import ListItem from "@/components/ListItem/ListItem";
 import Input from "@/components/Input/Input";
+import Tableau from "@/components/Tableau/Tableau";
 
 export default function ListScreen() {
   const queryClient = useQueryClient();
@@ -52,6 +53,7 @@ export default function ListScreen() {
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
+      <Tableau />
       <View>
         <Input onChange={search} />
 

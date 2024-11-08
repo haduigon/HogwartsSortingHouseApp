@@ -16,7 +16,7 @@ export default function TabLayout() {
     initialData: () => queryClient.getQueryData(["currentHero"]),
   });
 
-  function handleRightButtonPress() {
+  function handleReset() {
     queryClient.setQueryData(["success"], 0);
     queryClient.setQueryData(["failed"], 0);
 
@@ -33,7 +33,7 @@ export default function TabLayout() {
         name="index"
         options={{
           title: "Home",
-
+          headerTitleAlign: 'center',
           tabBarIcon: ({ focused }) => (
             <TabBarIcon name={"home"} color={focused ? "black" : "grey"} />
           ),
@@ -47,7 +47,7 @@ export default function TabLayout() {
           headerRight: () => (
             <TouchableOpacity
               style={{ padding: 10 }}
-              onPress={() => handleRightButtonPress()}
+              onPress={() => handleReset()}
             >
               <Text>Reset</Text>
             </TouchableOpacity>
@@ -58,6 +58,7 @@ export default function TabLayout() {
         name="ListScreen"
         options={{
           title: "List",
+          headerTitleAlign: 'center',
           tabBarIcon: ({ focused }) => (
             <TabBarIcon
               name={"code-slash"}
@@ -82,7 +83,7 @@ export default function TabLayout() {
           headerRight: () => (
             <TouchableOpacity
               style={{ padding: 10 }}
-              onPress={() => handleRightButtonPress()}
+              onPress={() => handleReset()}
             >
               <Text>Reset</Text>
             </TouchableOpacity>
@@ -94,6 +95,7 @@ export default function TabLayout() {
         options={() => {
           return {
             title: currentHero?.name ? currentHero.name : "Hero Details",
+            headerTitleAlign: 'center',
             tabBarButton: () => null,
             headerShown: true,
             headerLeft: () => (
