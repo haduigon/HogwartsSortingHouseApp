@@ -10,31 +10,18 @@ import {
   ScrollView,
   RefreshControl,
   Image,
-  Pressable,
-  Animated,
 } from "react-native";
 import { fetchStudentCharacters, getRandomElement } from "../../helpres/utils";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useFocusEffect } from "expo-router";
+// import { useFocusEffect } from "expo-router";
 import ControlPanel from "@/components/ControlPanel";
 import { Hero } from "@/helpres/types";
 import Tableau from "@/components/Tableau/Tableau";
 import ModalMessage from "@/components/ModalMessage/ModalMessage";
 
-type Stat = {
-  total: number;
-  success: number;
-  failed: number;
-};
-
-const initialValue: Stat = {
-  total: 0,
-  success: 0,
-  failed: 0,
-};
-
 export default function HomeScreen() {
   const queryClient = useQueryClient();
+  const [modalMessage, setModalMessage] = useState<string | null>(null);
 
   const { data, error, isLoading } = useQuery({
     queryKey: ["students"],
@@ -109,10 +96,18 @@ export default function HomeScreen() {
       queryClient.setQueryData(["success"], (prevData: number) => {
         return prevData + 1;
       });
+
+      setModalMessage("SUCCESS!");
+      
+      setTimeout(() => reffr(), 2000);
+      setTimeout(() => setModalMessage(null), 2000);
+      
     } else {
       queryClient.setQueryData(["failed"], (prevData: number) => {
         return prevData + 1;
       });
+      setModalMessage("FAIL!");
+      setTimeout(() => setModalMessage(null), 2000);
     }
 
     if (hero) {
@@ -148,11 +143,14 @@ export default function HomeScreen() {
       contentContainerStyle={styles.container}
     >
       <Tableau />
-      {/* <ModalMessage
-        message="SUCCESS!"
+      {modalMessage && (
+        <ModalMessage
+        message={modalMessage}
         isVisible={true}
         onClose={() => {}}
-      /> */}
+      />
+      )}
+      
       <View>
         {hero && (
           <Image
