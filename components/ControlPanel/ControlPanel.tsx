@@ -36,8 +36,8 @@ const ControlPanel: React.FC<Props> = ({ onPress }) => {
           <Text style={styles.text}>Hufflepuff</Text>
         </Pressable>
       </View>
-      <View style={styles.fullWidthPressable}>
-        <Pressable style={styles.pressable} onPress={() => onPress("")}>
+      <View style={styles.row}>
+        <Pressable style={styles.pressableBig} onPress={() => onPress("")}>
           <Text style={styles.text}>Not in house</Text>
         </Pressable>
       </View>
@@ -57,19 +57,9 @@ const styles = StyleSheet.create({
     width: "80%",
     marginVertical: 10,
   },
-  fullWidthPressable: {
-    width: 300,
-    marginVertical: 10,
-    backgroundColor: "#e5e5e5",
-    flex: 1,
-    borderRadius: 5,
-    justifyContent: "center",
-  },
   pressable: {
     backgroundColor: "#e5e5e5",
     padding: 15,
-    // paddingBottom: 20,
-    // paddingTop: 20,
     height: 80,
     borderRadius: 5,
     alignItems: "center",
@@ -80,6 +70,15 @@ const styles = StyleSheet.create({
   text: {
     color: "black",
     fontSize: 16,
+  },
+  pressableBig: {
+    backgroundColor: "#e5e5e5",
+    padding: 15,
+    borderRadius: 5,
+    alignItems: "center",
+    flex: 1,
+    marginHorizontal: 5,
+    justifyContent: "center",
   },
 });
 

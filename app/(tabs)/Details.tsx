@@ -1,7 +1,5 @@
-// import { useRouter } from "expo-router";
 import React from "react";
 import { View, Text, Image, StyleSheet } from "react-native";
-// import { useLocalSearchParams } from 'expo-router';
 import { Hero } from "@/helpres/types";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
@@ -15,31 +13,38 @@ function HeroDetails() {
   });
 
   return (
-    <View>
-      <View style={styles.statContainer}>
-        <Text>{currentHero?.name}</Text>
-        <Text>{currentHero?.attempts}</Text>
-        <Image
-          source={{
-            uri: !currentHero?.image
-              ? "https://hp-api.onrender.com/images/harry.jpg"
-              : currentHero.image,
-          }}
-          style={styles.image}
-          resizeMode="contain"
-        />
-      </View>
+    <View style={styles.container}>
+      <Image
+        source={{
+          uri: !currentHero?.image
+            ? "https://hp-api.onrender.com/images/harry.jpg"
+            : currentHero.image,
+        }}
+        style={styles.image}
+        resizeMode="contain"
+      />
+      {currentHero?.attempts > 0 ? (
+        <View style={styles.statContainer}>
+          <Text style={styles.textRed}>ACCESS DENIED</Text>
+        </View>
+      ) : (
+        <View style={styles.statContainer}>
+          <Text style={styles.text}>House: {currentHero?.house}</Text>
+          <Text style={styles.text}>
+            Date of birdth: {currentHero?.dateOfBirth}
+          </Text>
+          <Text style={styles.text}>Actor: {currentHero?.actor}</Text>
+          <Text style={styles.text}>Species: {currentHero?.species}</Text>
+        </View>
+      )}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    // justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#f0f0f0",
-    marginBottom: 10,
+    flexDirection: "row",
+    marginLeft: 10,
   },
   loaderContainer: {
     flex: 1,
@@ -53,21 +58,28 @@ const styles = StyleSheet.create({
     backgroundColor: "#f8d7da",
   },
   image: {
-    width: 50,
-    height: 80,
+    width: 150,
+    height: 200,
     marginTop: 20,
-    // borderRadius: 50,
   },
   text: {
-    textAlign: "center",
+    padding: 10,
+    paddingTop: 0,
   },
   statContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
     width: "100%",
     padding: 20,
-    marginTop: 10,
+  },
+  textRed: {
+    textAlign: "center",
+    fontWeight: "bold",
+    color: "red",
+    fontSize: 20,
+    borderColor: "red",
+    borderWidth: 5,
+    width: "60%",
+    padding: 20,
+    borderRadius: 5,
   },
 });
 

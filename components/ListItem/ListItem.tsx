@@ -13,6 +13,8 @@ import {
 import { Hero } from "@/helpres/types";
 import { useRouter } from "expo-router";
 import { useQueryClient } from "@tanstack/react-query";
+import Ionicons from "@expo/vector-icons/FontAwesome";
+import Ionicons2 from "@expo/vector-icons/MaterialIcons";
 
 type ListItemProps = {
   onPress: () => void;
@@ -33,48 +35,43 @@ function ListItem({ hero, onPress }: ListItemProps) {
   return (
     <Pressable onPress={() => handlePress(hero)}>
       <View style={styles.statContainer}>
-        <Text>{hero.name}</Text>
-        <Text>{hero.attempts}</Text>
-        <Image
-          source={{
-            uri: !hero.image
-              ? "https://hp-api.onrender.com/images/harry.jpg"
-              : hero.image,
-          }}
-          style={styles.image}
-          resizeMode="contain"
-        />
-        <Pressable onPress={() => onPress()}>
-          <Text>Retry</Text>
-        </Pressable>
+        <View style={styles.imageBox}>
+          <Image
+            source={{
+              uri: !hero.image
+                ? "https://hp-api.onrender.com/images/harry.jpg"
+                : hero.image,
+            }}
+            style={styles.image}
+            resizeMode="contain"
+          />
+          <View style={styles.nameBox}>
+            <Text style={styles.title}>{hero.name}</Text>
+            <Text>Attempts: {hero.attempts}</Text>
+          </View>
+        </View>
+
+        {hero.attempts !== 0 && (
+          <View style={styles.retryBox}>
+            <Pressable onPress={() => onPress()} style={styles.retryIcon}>
+              <Ionicons2 size={32} name="autorenew" color={"grey"} />
+            </Pressable>
+            <Ionicons2 size={32} name="cancel" color={"red"} />
+          </View>
+        )}
+        {hero.attempts === 0 && (
+          <Ionicons size={32} name="check-circle" color={"green"} />
+        )}
       </View>
     </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    // justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#f0f0f0",
-    marginBottom: 10,
-  },
-  loaderContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  errorContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#f8d7da",
-  },
   image: {
     width: 50,
     height: 80,
-    marginTop: 20,
+    marginTop: 10,
     // borderRadius: 50,
   },
   statContainer: {
@@ -82,20 +79,30 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     width: "100%",
-    padding: 20,
-    marginTop: 10,
+    padding: 10,
+    paddingLeft: 20,
+    paddingRight: 20,
+    // marginTop: 0,
   },
   text: {
     textAlign: "center",
   },
-  statItem: {
-    borderColor: "black",
-    borderWidth: 1,
-    padding: 40,
+  imageBox: {
+    flexDirection: "row",
+    alignItems: "center",
   },
-  flatListContent: {
-    paddingBottom: 20,
-    marginBottom: 40,
+  title: {
+    fontWeight: "bold",
+  },
+  nameBox: {
+    marginLeft: 20,
+  },
+  retryBox: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  retryIcon: {
+    marginRight: 20,
   },
 });
 

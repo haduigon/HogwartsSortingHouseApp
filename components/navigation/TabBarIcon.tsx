@@ -15,11 +15,7 @@ export function TabBarIcon({
         flexDirection: "row",
       }}
     >
-      <Ionicons 
-        size={28} 
-        style={[{ marginBottom: -3 }, style]} {...rest}
-        
-      />
+      <Ionicons size={28} style={[{ marginBottom: -3 }, style]} {...rest} />
     </View>
   );
 }

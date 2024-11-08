@@ -2,9 +2,10 @@ import { Tabs, useRouter } from "expo-router";
 import React from "react";
 
 import { TabBarIcon } from "@/components/navigation/TabBarIcon";
-import { TouchableOpacity, Text } from "react-native";
+import { TouchableOpacity, Text, View, StyleSheet } from "react-native";
 import { Hero } from "@/helpres/types";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import Ionicons from "@expo/vector-icons/AntDesign";
 
 export default function TabLayout() {
   const queryClient = useQueryClient();
@@ -33,7 +34,9 @@ export default function TabLayout() {
         name="index"
         options={{
           title: "Home",
-          headerTitleAlign: 'center',
+          headerTitleAlign: "center",
+          headerStyle: {
+          },
           tabBarIcon: ({ focused }) => (
             <TabBarIcon name={"home"} color={focused ? "black" : "grey"} />
           ),
@@ -58,7 +61,7 @@ export default function TabLayout() {
         name="ListScreen"
         options={{
           title: "List",
-          headerTitleAlign: 'center',
+          headerTitleAlign: "center",
           tabBarIcon: ({ focused }) => (
             <TabBarIcon
               name={"code-slash"}
@@ -77,7 +80,10 @@ export default function TabLayout() {
               style={{ padding: 10 }}
               onPress={() => router.push({ pathname: "/" })}
             >
-              <Text>Back</Text>
+              <View style={styles.backButtonBox}>
+                <Ionicons name="left" size={20} color="black" />
+                <Text>Back</Text>
+              </View>
             </TouchableOpacity>
           ),
           headerRight: () => (
@@ -95,7 +101,7 @@ export default function TabLayout() {
         options={() => {
           return {
             title: currentHero?.name ? currentHero.name : "Hero Details",
-            headerTitleAlign: 'center',
+            headerTitleAlign: "center",
             tabBarButton: () => null,
             headerShown: true,
             headerLeft: () => (
@@ -103,7 +109,10 @@ export default function TabLayout() {
                 style={{ padding: 10 }}
                 onPress={() => router.push({ pathname: "/ListScreen" })}
               >
-                <Text>Back</Text>
+                <View style={styles.backButtonBox}>
+                  <Ionicons name="left" size={20} color="black" />
+                  <Text>Back</Text>
+                </View>
               </TouchableOpacity>
             ),
           };
@@ -112,3 +121,10 @@ export default function TabLayout() {
     </Tabs>
   );
 }
+
+const styles = StyleSheet.create({
+  backButtonBox: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+});

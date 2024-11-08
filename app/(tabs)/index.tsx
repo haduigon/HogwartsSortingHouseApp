@@ -98,10 +98,9 @@ export default function HomeScreen() {
       });
 
       setModalMessage("SUCCESS!");
-      
+
       setTimeout(() => reffr(), 2000);
       setTimeout(() => setModalMessage(null), 2000);
-      
     } else {
       queryClient.setQueryData(["failed"], (prevData: number) => {
         return prevData + 1;
@@ -145,12 +144,12 @@ export default function HomeScreen() {
       <Tableau />
       {modalMessage && (
         <ModalMessage
-        message={modalMessage}
-        isVisible={true}
-        onClose={() => {}}
-      />
+          message={modalMessage}
+          isVisible={true}
+          onClose={() => {}}
+        />
       )}
-      
+
       <View>
         {hero && (
           <Image

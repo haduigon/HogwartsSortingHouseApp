@@ -5,11 +5,8 @@ import { useEffect } from "react";
 import "react-native-reanimated";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import React from "react";
-import { Platform, SafeAreaView, StatusBar, StyleSheet } from "react-native";
+import { Platform, StatusBar, StyleSheet } from "react-native";
 
-// import { useColorScheme } from '@/hooks/useColorScheme';
-
-// Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 const queryClient = new QueryClient();
@@ -31,20 +28,21 @@ export default function RootLayout() {
   }
 
   return (
-    <SafeAreaView style={styles.safeView}>
-      <QueryClientProvider client={queryClient}>
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="+not-found" />
-        </Stack>
-      </QueryClientProvider>
-    </SafeAreaView>
+    // <SafeAreaView style={styles.safeView}>
+    <QueryClientProvider client={queryClient}>
+      <Stack>
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="+not-found" />
+      </Stack>
+    </QueryClientProvider>
+    // </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   safeView: {
     flex: 1,
+    // padding: 0,
     marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
 });

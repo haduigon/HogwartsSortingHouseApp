@@ -32,7 +32,7 @@ function TableauItem({ name }: Props) {
 
   return (
     <View style={styles.statItem}>
-      <Text style={styles.text}>{name}</Text>
+      <Text style={[styles.text, styles.boldText]}>{name}</Text>
       <Text style={styles.text}>{displayData}</Text>
     </View>
   );
@@ -54,6 +54,9 @@ const styles = StyleSheet.create({
   },
   text: {
     textAlign: "center",
+  },
+  boldText: {
+    fontWeight: "bold",
   },
 });
 

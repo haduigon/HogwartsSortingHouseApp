@@ -52,9 +52,10 @@ export default function ListScreen() {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={styles.container}
     >
       <Tableau />
-      <View>
+      <View style={styles.container}>
         <Input onChange={search} />
 
         <FlatList
@@ -73,10 +74,7 @@ export default function ListScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#f0f0f0",
-    marginBottom: 10,
   },
   loaderContainer: {
     flex: 1,
@@ -113,6 +111,6 @@ const styles = StyleSheet.create({
   },
   flatListContent: {
     // paddingBottom: 20,
-    marginBottom: 100,
+    marginBottom: 10,
   },
 });
