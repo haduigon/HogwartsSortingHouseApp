@@ -16,8 +16,8 @@ const styles = StyleSheet.create({
   statContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    width: "100%",
-    padding: 20,
+    width: "95%",
+    padding: 10,
     marginTop: 0,
   },
   statItem: {

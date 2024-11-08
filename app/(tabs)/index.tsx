@@ -1,9 +1,6 @@
-/* eslint-disable */
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
-  // Image,
   StyleSheet,
-  // Platform,
   View,
   Text,
   ActivityIndicator,
@@ -13,7 +10,6 @@ import {
 } from "react-native";
 import { fetchStudentCharacters, getRandomElement } from "../../helpres/utils";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-// import { useFocusEffect } from "expo-router";
 import ControlPanel from "@/components/ControlPanel/ControlPanel";
 import { Hero } from "@/helpres/types";
 import Tableau from "@/components/Tableau/Tableau";
@@ -41,7 +37,7 @@ export default function HomeScreen() {
     }
     const randomGuy: object | undefined = getRandomElement(data);
     if (randomGuy) {
-      const newRandomGuy = { ...(randomGuy as {}), attempts: 0 };
+      const newRandomGuy = { ...(randomGuy as Hero), attempts: 0 };
 
       queryClient.setQueryData(["hero"], () => {
         return newRandomGuy;
@@ -177,6 +173,8 @@ const styles = StyleSheet.create({
     // justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#f0f0f0",
+    borderTopWidth: 5,
+    borderBottomWidth: 5,
   },
   loaderContainer: {
     flex: 1,

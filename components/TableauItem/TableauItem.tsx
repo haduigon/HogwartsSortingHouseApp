@@ -39,18 +39,11 @@ function TableauItem({ name }: Props) {
 }
 
 const styles = StyleSheet.create({
-  statContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    width: "100%",
-    padding: 20,
-    marginTop: 50,
-  },
   statItem: {
     borderColor: "black",
-    borderWidth: 1,
+    borderWidth: 2,
     padding: 20,
-    width: 100,
+    width: '30%',
   },
   text: {
     textAlign: "center",

@@ -35,8 +35,7 @@ export default function TabLayout() {
         options={{
           title: "Home",
           headerTitleAlign: "center",
-          headerStyle: {
-          },
+          headerStyle: {},
           tabBarIcon: ({ focused }) => (
             <TabBarIcon name={"home"} color={focused ? "black" : "grey"} />
           ),

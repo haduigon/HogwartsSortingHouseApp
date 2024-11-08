@@ -1,10 +1,8 @@
 /* eslint-disable */
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
-  // Image,
   StyleSheet,
   View,
-  Text,
   FlatList,
   KeyboardAvoidingView,
   Platform,
@@ -52,7 +50,7 @@ export default function ListScreen() {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={styles.container}
+      style={[styles.container, styles.lines]}
     >
       <Tableau />
       <View style={styles.container}>
@@ -76,6 +74,11 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
   },
+  lines: {
+    borderColor: "black",
+    borderTopWidth: 5,
+    borderBottomWidth: 5,
+  },
   loaderContainer: {
     flex: 1,
     justifyContent: "center",
@@ -91,7 +94,6 @@ const styles = StyleSheet.create({
     width: 50,
     height: 80,
     marginTop: 20,
-    // borderRadius: 50,
   },
   statContainer: {
     flexDirection: "row",
@@ -110,7 +112,6 @@ const styles = StyleSheet.create({
     padding: 40,
   },
   flatListContent: {
-    // paddingBottom: 20,
     marginBottom: 10,
   },
 });

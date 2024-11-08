@@ -23,7 +23,7 @@ function HeroDetails() {
         style={styles.image}
         resizeMode="contain"
       />
-      {currentHero?.attempts > 0 ? (
+      {currentHero && currentHero.attempts > 0  ? (
         <View style={styles.statContainer}>
           <Text style={styles.textRed}>ACCESS DENIED</Text>
         </View>
